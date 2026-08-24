@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Materials</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        
+        #appContainer { display: none; width: 100%; max-width: 800px; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid #e2e8f0; }
+        .logout-btn { padding: 8px 16px; border-radius: 6px; font-weight: 500; cursor: pointer; border: 1px solid #ef4444; background: transparent; color: #ef4444; }
+        .logout-btn:hover { background-color: #ef4444; color: white; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .unit-card { background-color: var(--card-bg); border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; text-align: left; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 10px; }
+        .unit-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border-color: var(--primary); }
+        .unit-card h3 { font-size: 18px; color: var(--primary); }
+        .unit-card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+        /* ستايل النافذة التحذيرية (Modal Styles) */
+        .modal-overlay {
+            display: none; /* مخفية افتراضياً */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            direction: rtl; /* لدعم اللغة العربية */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .modal-content h2 { 
+            color: #ef4444; 
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .modal-content p { 
+            color: #334155; 
+            line-height: 1.7; 
+            margin-bottom: 15px; 
+            font-size: 16px; 
+        }
+        .modal-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background-color 0.2s;
+        }
+        .modal-btn:hover { background-color: #dc2626; }
+    </style>
+</head>
+<body>
+
+    <!-- نافذة التحذير المنبثقة -->
+    <div id="warningModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>⚠️ تنبيه وتحذير هام</h2>
+            <p>
+                <strong>المساءلة القانونية:</strong> يُمنع منعاً باتاً نسخ، تصوير، أو مشاركة أي جزء من هذا المحتوى بأي شكل من الأشكال أو عبر أي منصة دون إذن وتصريح مسبق. أي انتهاك لذلك يعرضك للمساءلة القانونية والملاحقة القضائية بموجب قوانين حماية الملكية الفكرية.
+            </p>
+            <p>
+                <strong>الأمانة أمام الله:</strong> هذه المواد هي أمانة بين يديك، ونؤكد أنه <u>لا يوجد أي تسامح أو إبراء ذمة أمام الله عز وجل</u> لكل من يقوم بتسريبها أو مشاركتها أو استغلالها بغير وجه حق.
+            </p>
+            <button id="agreeBtn" class="modal-btn">أتعهد بذلك وأوافق</button>
+        </div>
+    </div>
+
+    <div id="appContainer">
+        <header>
+            <h1>Study Modules WEST FINAL</h1>
+            <button id="logoutBtn" class="logout-btn">Log Out</button>
+        </header>
+
+        <div class="grid">
+            <button class="unit-card" onclick="goToReadPage('WEST_unit5.html')">
+                <h3>Unit 5</h3>
+                <p>Open the interactive document for Unit 5.</p>
+            </button>
+            <button class="unit-card" onclick="goToReadPage('WEST_unit6.html')">
+                <h3>Unit 6</h3>
+                <p>Open the interactive document for Unit 6.</p>
+            </button>
+            <button class="unit-card" onclick="goToReadPage('WEST_unit7.html')">
+                <h3>Unit 7</h3>
+                <p>Open the interactive document for Unit 7.</p>
+            </button>
+            <button class="unit-card" onclick="goToReadPage('WEST_unit8.html')">
+                <h3>Unit 8</h3>
+                <p>Open the interactive document for Unit 8.</p>
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+        const supabase = createClient('https://ilpvgaogfdpjieivrkpf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlscHZnYW9nZmRwamllaXZya3BmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyNDQ4MDEsImV4cCI6MjEwMjgyMDgwMX0.WWqu5VCmdfXH1i9XBP9TyksZQZMlMezWw3jHuMBG1YU');
+
+        // 1. Check access
+        async function verifyAccess() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                window.location.href = 'index.html';
+            } else {
+                document.getElementById('appContainer').style.display = 'block';
+                
+                // التحقق مما إذا كان المستخدم قد وافق على الشروط في هذه الجلسة
+                if (!sessionStorage.getItem('termsAgreed')) {
+                    document.getElementById('warningModal').style.display = 'flex';
+                }
+            }
+        }
+
+        // إغلاق النافذة التحذيرية عند الموافقة
+        document.getElementById('agreeBtn').addEventListener('click', () => {
+            sessionStorage.setItem('termsAgreed', 'true');
+            document.getElementById('warningModal').style.display = 'none';
+        });
+
+        // 2. Navigation function
+        window.goToReadPage = function(fileName) {
+            window.location.href = `read.html?file=${encodeURIComponent(fileName)}`;
+        };
+
+        // 3. Logout
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            sessionStorage.removeItem('termsAgreed'); // إزالة الموافقة عند تسجيل الخروج
+            window.location.href = 'index.html';
+        });
+
+        verifyAccess();
+    </script>
+</body>
+</html>

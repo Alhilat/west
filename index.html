@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEST - University Portal</title>
+    <!-- استدعاء خطوط احترافية -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Inter', sans-serif;
+            background-color: #f3f4f6; /* لون خلفية رمادي فاتح جداً مريح للعين */
+            color: #111827;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* البطاقة البيضاء الرئيسية */
+        .login-card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03), 0 4px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0f0f0;
+        }
+
+        /* القسم العلوي: معلومات المادة والمهندس */
+        .academic-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .uni-badge {
+            display: inline-block;
+            background-color: #eff6ff;
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .academic-header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .academic-header p {
+            font-size: 15px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .academic-header p strong {
+            color: #111827;
+            font-weight: 700;
+        }
+
+        .contact-number {
+            display: inline-block;
+            margin-top: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #6b7280;
+            background-color: #f9fafb;
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+            direction: ltr;
+        }
+
+        /* الخط الفاصل */
+        .divider {
+            border: none;
+            height: 1px;
+            background-color: #e5e7eb;
+            margin: 25px 0;
+        }
+
+        /* قسم تسجيل الدخول */
+        .form-section {
+            direction: ltr; /* حقول الإدخال باللغة الإنجليزية */
+            text-align: left;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: #f9fafb;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #111827;
+            transition: all 0.2s ease;
+        }
+
+        .input-group input::placeholder {
+            color: #9ca3af;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            background-color: #ffffff;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* زر الدخول (تصميم فخم وداكن) */
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #111827;
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            background-color: #1f2937;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            color: #dc2626;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 16px;
+            min-height: 20px;
+        }
+
+        /* الفوتر (حقوق المبرمج) */
+        .developer-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .developer-footer span {
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .developer-footer a {
+            direction: ltr;
+            display: inline-block;
+            color: #059669; /* لون أخضر رسمي يرمز للواتساب */
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+
+        .developer-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <!-- القسم الأكاديمي -->
+        <div class="academic-header">
+            <span class="uni-badge">جامعة اليرموك</span>
+            <h1>WEST</h1>
+            <p>
+            النسخة الالكترونية<br>
+                 <strong>المهندس محمد الهيلات</strong>
+            </p>
+            <span class="contact-number">📞 0791685306</span>
+        </div>
+
+        <hr class="divider">
+        
+        <!-- قسم إدخال البيانات -->
+        <div class="form-section">
+            <div class="input-group">
+                <label for="userId">ID</label>
+                <input type="text" id="userId" placeholder="Enter your ID" required autocomplete="username">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+
+            <button id="loginBtn">Sign In</button>
+            <div class="error-message" id="errorMsg"></div>
+        </div>
+    </div>
+
+    <!-- الفوتر الخاص بك -->
+    <div class="developer-footer">
+        تطوير وبرمجة: <span>عبدالرحمن غسان</span> | 
+        <a href="https://wa.me/962791685307" target="_blank">0791685307</a>
+    </div>
+
+    <!-- استدعاء Supabase -->
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+        const supabaseUrl = 'https://ilpvgaogfdpjieivrkpf.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlscHZnYW9nZmRwamllaXZya3BmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcyNDQ4MDEsImV4cCI6MjEwMjgyMDgwMX0.WWqu5VCmdfXH1i9XBP9TyksZQZMlMezWw3jHuMBG1YU';
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMsg = document.getElementById('errorMsg');
+
+        loginBtn.addEventListener('click', async () => {
+            const rawId = document.getElementById('userId').value.trim();
+            const password = document.getElementById('password').value;
+
+            errorMsg.textContent = '';
+            
+            if (!rawId || !password) {
+                errorMsg.textContent = 'Please fill in both fields.';
+                return;
+            }
+
+            loginBtn.textContent = 'Authenticating...';
+            loginBtn.disabled = true;
+
+            const authEmail = `${rawId}@system.local`;
+
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: authEmail,
+                password: password,
+            });
+
+            if (error) {
+                errorMsg.textContent = 'Invalid ID or password.';
+                loginBtn.textContent = 'Sign In';
+                loginBtn.disabled = false;
+            } else {
+                window.location.href = 'navigate.html';
+            }
+        });
+
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                loginBtn.click();
+            }
+        });
+    </script>
+
+</body>
+</html>
